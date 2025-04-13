@@ -1,12 +1,23 @@
-# IPTV StreamHub
-
-> [!NOTE]  
->A simple IPTV `restream` and `synchronization` (watch2gether) application with `web` frontend. Share your iptv playlist and watch it together with your friends.
+> [!NOTE]
+> Thank you for all the amazing feedback and ideas! One of the most requested features has been a **hosted solution** for non-technical users.
 > 
->Actively in devlopment and open for your ideas! <br>
-> [TEST HERE](https://ante.is-a.dev) (Only for testing, the used channels are free (not reliable) and zhe server's distance may cause longer loading times. **Try locally** if the test server is down.)
+> 🎉 I'm currently working on a fully hosted version – no setup required and **completely FREE**!   
+> 👉 Join the [WAITLIST](https://iptv-waitlist.vercel.app/) to show your interest and be among the first to try it out.
 >
-> [![Test Server Status](https://github.com/antebrl/cron-jobs/actions/workflows/daily-channel-clear.yml/badge.svg)](https://ante.is-a.dev)
+> 🚀 The upcoming version will include several highly requested features:
+> - **Group Watching** – Multiple groups can watch different channels independently.
+> - **Authentication & Team Management** – Invite people, assign roles, and manage access.
+> - **Personal Channel Management** – Each user can create custom channel groups and favorites.
+> - **Improved Streaming** – Smoother playback and a more robust synchronization engine.
+> - **Extended Format Support** – Compatibility with MPEG-DASH and XStream-Codes.
+
+# IPTV StreamHub
+ A simple IPTV `restream` and `synchronization` (watch2gether) application with `web` frontend. Share your iptv playlist and watch it together with your friends.
+
+Actively in devlopment and open for your ideas! <br>
+[TEST HERE](https://ante.is-a.dev) (Only for testing, the used channels are free (not reliable) and zhe server's distance may cause longer loading times. **Try locally** if the test server is down.)
+
+[![Test Server Status](https://github.com/antebrl/cron-jobs/actions/workflows/daily-channel-clear.yml/badge.svg)](https://ante.is-a.dev)
 
 ## 💡Use Cases
 - [x] IPTV Web player supporting multiple playlists at once.
