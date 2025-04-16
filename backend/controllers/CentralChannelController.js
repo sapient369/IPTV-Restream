@@ -120,7 +120,7 @@ module.exports = {
 
         let playlistStr = `#EXTM3U
 #EXTINF:-1 tvg-name="CURRENT RESTREAM" tvg-logo="https://cdn-icons-png.freepik.com/512/9294/9294560.png" group-title="StreamHub",CURRENT RESTREAM
-${backendBaseUrl}/proxy/current`;
+${backendBaseUrl}/proxy/current \n`;
 
         //TODO: dynamically add channels from ChannelService
         const channels = ChannelService.getChannels();
@@ -130,7 +130,7 @@ ${backendBaseUrl}/proxy/current`;
                 restreamMode = channel.headers && channel.headers.length > 0 ? 'proxy' : 'direct';
             }
 
-            playlistStr += `\n#EXTINF:-1 tvg-name="${channel.name}" tvg-logo="${channel.avatar}" group-title="${channel.group ?? ''}",${channel.name}\n`;
+            playlistStr += `\n#EXTINF:-1 tvg-name="${channel.name}" tvg-logo="${channel.avatar}" group-title="${channel.group ?? ''}",${channel.name} \n`;
 
             if(channel.mode === 'direct' || restreamMode === 'direct') {
                 playlistStr += channel.url;
@@ -139,10 +139,11 @@ ${backendBaseUrl}/proxy/current`;
                 if(channel.headers && channel.headers.length > 0) {
                     headers = Buffer.from(JSON.stringify(channel.headers)).toString('base64');
                 }
-                playlistStr += `${backendBaseUrl}/proxy/channel?url=${encodeURIComponent(channel.url)}${headers ? `&headers=${headers}` : ''}`;
+                playlistStr += `${backendBaseUrl}/proxy/channel?url=${encodeURIComponent(channel.url)}${headers ? `&headers=${headers}` : ''} \n`;
             }
         }
 
+        res.set('Content-Type', 'text/plain');
         res.send(playlistStr);
     }
 };
