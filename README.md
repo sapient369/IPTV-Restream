@@ -1,6 +1,7 @@
 > [!NOTE]
 > Thank you for all the amazing feedback and ideas! One of the most requested features has been a **hosted solution** for non-technical users.
-> 
+>
+> #### NEW VERSION
 > 🎉 I'm currently working on a fully hosted version – no setup required and **completely FREE**!   
 > 👉 Join the [WAITLIST](https://iptv-waitlist.vercel.app/) to show your interest and be among the first to try it out.
 >
@@ -65,19 +66,19 @@ These are some tested playlists as an example. Use your own iptv playlist for th
 ---
 
 - [Move On Joy Playlist](https://raw.githubusercontent.com/pigzillaaaaa/iptv-scraper/refs/heads/main/moveonjoy.m3u8): A playlist with various channels, including sports and movies. Use the playlist or single channels (preferred) in proxy mode.
+- [Daddylive](https://daddylive.mp/): Various tv-channels including sports
+
+  Use this playlistUrl: `https://raw.githubusercontent.com/pigzillaaaaa/iptv-scraper/refs/heads/main/daddylive-channels.m3u8`. <br>
+  Also add these headers:
+  - `Referer`: setting `#EXTVLCOPT:http-referrer` of the [playlist](https://raw.githubusercontent.com/pigzillaaaaa/iptv-scraper/refs/heads/main/daddylive-channels.m3u8)
+  - `Origin`: setting `#EXTVLCOPT:http-origin` of the [playlist](https://raw.githubusercontent.com/pigzillaaaaa/iptv-scraper/refs/heads/main/daddylive-channels.m3u8)
+ 
+  The daddylive playlist only works locally! It won't work on the test server (https://ante.is-a.dev)! <br>
+  You also have to update (remove and add again) the playlist regularly, as the headers change regularly! This will be done automatically in the [new version](#new-version).
+
 - [Streamed SU Sports](https://streamed.su): Sport live-events <br>
   Just put any [matches api url](https://streamed.su/docs/matches) e.g. `https://streamed.su/api/matches/football/popular` as playlistUrl.
   
-- [Daddylive](https://daddylive.mp/): Various tv-channels including sports
-  
-  Add solo-channel stream-url: `https://ddy6new.iosplayer.ru/ddy6/premium<CHANNEL-NUMBER>/mono.m3u8` with the `CHANNEL-NUMBER` of daddylive website, e.g. `https://ddy6new.iosplayer.ru/ddy6/premium426/mono.m3u8` for https://daddylive.mp/stream/stream-426.php. <br>
-  This way you can craft your own `m3u` playlist with all channels you need!
-  
-  Make sure to add following headers:
-  - `Referer`: `https://cookiewebplay.xyz/`
-  - `Origin`: `https://cookiewebplay.xyz`
-  - `User-Agent`: `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36`
-
 ## 🖼️ Preview
 ![Frontend Preview](/frontend/ressources/frontend-preview.png)
 ![Add channel](/frontend/ressources/add-channel.png)
