@@ -1,7 +1,10 @@
 const request = require('request');
+const url = require('url');
 const ChannelService = require('../services/ChannelService');
 const ProxyHelperService = require('../services/proxy/ProxyHelperService');
 const SessionFactory = require('../services/session/SessionFactory');
+
+const proxyBaseUrl = '/proxy/';
 
 module.exports = {
     async channel(req, res) {
@@ -35,7 +38,11 @@ module.exports = {
         res.set('Access-Control-Allow-Origin', '*');
 
         try {
-            request(ProxyHelperService.getRequestOptions(targetUrl, headers), (error, response, body) => {
+            request({
+                ...ProxyHelperService.getRequestOptions(targetUrl, headers),
+                followRedirect: false 
+            }, (error, response, body) => {
+
                 if (error) {
                     if (!res.headersSent) {
                         return res.status(500).json({ error: 'Failed to fetch m3u8 file' });
@@ -44,6 +51,7 @@ module.exports = {
                     return;
                 }
 
+                // invalid response
                 if (response.statusCode >= 400) {
                     if (!res.headersSent) {
                         res.status(response.statusCode);
@@ -51,8 +59,16 @@ module.exports = {
                     return res.send(body);
                 }
 
+                //redirect response
+                if (response.statusCode >= 300) {
+                    const redirectLocation = response.headers.location;
+                    const absoluteUrl = url.resolve(targetUrl, redirectLocation);
+                    
+                    const proxyRedirect = `channel/?url=${encodeURIComponent(absoluteUrl)}${headers ? `&headers=${headers}` : ''}`;
+                    return res.redirect(response.statusCode, proxyRedirect);
+                }
+
                 try {
-                    const proxyBaseUrl = '/proxy/';
                     const responseUrl = response.request.href;
                     const rewrittenBody = ProxyHelperService.rewriteUrls(body, proxyBaseUrl, headers, responseUrl).join('\n');
                     res.send(rewrittenBody);
