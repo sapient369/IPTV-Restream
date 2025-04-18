@@ -44,9 +44,17 @@ module.exports = {
                     return;
                 }
 
+                if (response.statusCode >= 400) {
+                    if (!res.headersSent) {
+                        res.status(response.statusCode);
+                    }
+                    return res.send(body);
+                }
+
                 try {
                     const proxyBaseUrl = '/proxy/';
-                    const rewrittenBody = ProxyHelperService.rewriteUrls(body, proxyBaseUrl, headers, targetUrl).join('\n');
+                    const responseUrl = response.request.href;
+                    const rewrittenBody = ProxyHelperService.rewriteUrls(body, proxyBaseUrl, headers, responseUrl).join('\n');
                     res.send(rewrittenBody);
                 } catch (e) {
                     console.error('Failed to rewrite URLs:', e);
