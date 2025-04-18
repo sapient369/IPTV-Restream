@@ -10,7 +10,7 @@
 > - **Authentication & Team Management** – Invite people, assign roles, and manage access.
 > - **Personal Channel Management** – Each user can create custom channel groups and favorites.
 > - **Improved Streaming** – Smoother playback and a more robust synchronization engine.
-> - **Extended Format Support** – Compatibility with MPEG-DASH and XStream-Codes.
+> - **Extended Format Support** – Compatibility with MPEG-DASH and Xtream-Codes.
 
 # IPTV StreamHub
  A simple IPTV `restream` and `synchronization` (watch2gether) application with `web` frontend. Share your iptv playlist and watch it together with your friends.
@@ -20,10 +20,17 @@ Actively in devlopment and open for your ideas! <br>
 
 [![Test Server Status](https://github.com/antebrl/cron-jobs/actions/workflows/daily-channel-clear.yml/badge.svg)](https://ante.is-a.dev)
 
+> [!IMPORTANT]
+> If you're using an **Xtream Codes** playlist (format: `/get.php?username=xxx&password=xxx&type=xxx&output=xxx`), try the following options:
+> - Use **proxy mode** with HLS output: Use `&type=m3u_plus&output=hls` in your playlist URL.
+> - Use **restream mode** with MPEG-TS output: Use `&type=m3u_plus&output=ts` to your playlist URL.
+>
+> If your playlist is a plain HTTP link or has CORS issues, you must use **proxy** or **restream mode** to ensure compatibility in the web.
+
 ## 💡Use Cases
 - [x] IPTV Web player supporting multiple playlists at once.
-- [x] Connect with **multiple Devices** to 1 IPTV Stream, if your provider limits current streaming devices.
-- [x] Proxy all Requests through **one IP**.
+- [x] Connect with **multiple Devices** to 1 IPTV Stream, if your provider limits current streaming devices (restream mode).
+- [x] Proxy all Requests through **one IP** (proxy and restream mode).
   - [x] Helps with CORS issues.
 - [x] **Synchronize** IPTV streaming with multiple devices: Synchronized playback and channel selection for perfect Watch2Gether.
 - [x] **Share your iptv access** without revealing your actual stream-url (privacy-mode) and watch together with your friends.
