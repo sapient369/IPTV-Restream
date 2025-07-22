@@ -17,9 +17,13 @@ function startFFmpeg(nextChannel) {
     currentChannelId = nextChannel.id;
     const headers = nextChannel.headers;
 
+    const ffmpegArgs = [];
 
-    currentFFmpegProcess = spawn('ffmpeg', [
-        '-headers', headers.map(header => `${header.key}: ${header.value}`).join('\r\n'),
+    if (headers && headers.length > 0) {
+        ffmpegArgs.push('-headers', headers.map(header => `${header.key}: ${header.value}`).join('\r\n'));
+    }
+
+    ffmpegArgs.push(
         '-reconnect', '1',
         '-reconnect_at_eof', '1',
         '-reconnect_streamed', '1',
@@ -32,7 +36,9 @@ function startFFmpeg(nextChannel) {
         '-hls_flags', 'delete_segments+program_date_time',
         '-start_number', Math.floor(Date.now() / 1000),
         `${STORAGE_PATH}${currentChannelId}/${currentChannelId}.m3u8`
-    ]);
+    );
+
+    currentFFmpegProcess = spawn('ffmpeg', ffmpegArgs);
 
     currentFFmpegProcess.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
